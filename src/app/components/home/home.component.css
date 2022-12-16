@@ -40,7 +40,7 @@
   }
 
 
-#create-post {
+.create-post {
     min-height: 4rem;
     text-align: left;
     height: auto;
@@ -53,4 +53,13 @@
 .text-publications {
     font-size: 1.18rem;
 }
+
+.message-error {
+    display: none;
+    color: #FFF;
+    text-align: center;
+    font-weight:700;
+    padding: 0.625rem;
+    border-radius: 0.625rem;
+  }
   

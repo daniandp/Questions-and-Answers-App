@@ -6,15 +6,18 @@
             <div class="cont-descriptions-post">
                 <span class="span-text">Título</span>
                 <h6>Se específico con el título de tu pregunta</h6>
-                <span #questionTitle role="textbox" contenteditable id="create-post" (click)=" cleanTitle()">Ejm: ¿Cómo se utiliza el métodol filter?</span>
+                <span #questionTitle role="textbox" contenteditable class="create-post" (click)="cleanTitle()">Ejm: ¿Cómo
+                    se utiliza el método filter?</span>
             </div>
             <div class="cont-descriptions-post">
                 <span class="span-text">Cuenta los detalles de tu problema</span>
                 <h6>Ofrece tantos detalles como sea posible</h6>
-                <span #questionContent role="textbox" contenteditable id="create-post" (click)="cleanContent()">Ejm: estoy intentando filtrar un elemento de un
+                <span #questionContent role="textbox" contenteditable class="create-post" (click)="cleanContent()">Ejm:
+                    estoy intentando filtrar un elemento de un
                     array</span>
             </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <p #messageError class="message-error"></p>
+            <div class="d-grid gap-2 d-md-flex">
                 <button class="btn btn-primary" type="button" (click)="postQuestion()">Publicar</button>
             </div>
         </div>
