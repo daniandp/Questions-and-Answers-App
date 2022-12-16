@@ -4,4 +4,5 @@ export default interface Question {
     detail: string;
     date: string;
     hour: string;
+    createdAt: number;
 }

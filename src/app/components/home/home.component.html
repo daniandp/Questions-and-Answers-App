@@ -6,7 +6,8 @@
             <div class="cont-descriptions-post">
                 <span class="span-text">Título</span>
                 <h6>Se específico con el título de tu pregunta</h6>
-                <span #questionTitle role="textbox" contenteditable class="create-post" (click)="cleanTitle()">Ejm: ¿Cómo
+                <span #questionTitle role="textbox" contenteditable class="create-post" (click)="cleanTitle()">Ejm:
+                    ¿Cómo
                     se utiliza el método filter?</span>
             </div>
             <div class="cont-descriptions-post">
@@ -24,3 +25,19 @@
     </div>
     <h3 class="text-publications">Todas las preguntas</h3>
 </section>`;
+<section class="container-post">
+    <div class="post-publicated"  *ngFor="let question of sortedQuestions">
+        <div>
+            <div>
+                <p class="question-title">{{question.title}}</p> 
+                <p class="question-detail">{{question.detail}}</p>
+            </div>
+            <div class="post-date">
+                <p> {{ question.date }}  {{ question.hour }} </p>
+            </div>
+            <!-- <div class="input-readonly">
+                <span id=${post.id} class="post-publicated cont-post" role="textbox"></span>
+            </div> -->
+        </div>
+    </div>`;
+</section>
