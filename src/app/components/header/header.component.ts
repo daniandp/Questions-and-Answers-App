@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, } from '@angular/core';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,50 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit  {
+    // @ViewChild('searchBar') searchBar!: ElementRef;
+    titleQuestion: Array<any> = []; // traemos el título de home
+    searchedResults: Array<any> = [];
+    allTitles: string = ''
+    filteredTitles: boolean = false;
+    questionsFromHeader: boolean = true;
+    
+
+    constructor(private questionService: QuestionService) {}
 
     ngOnInit(): void {
+        this.questionService.$questionsTitles.subscribe((value: any) => {
+            this.titleQuestion = value;
+        });
+
+        this.questionService.$allQuestions.subscribe((value: any) => {
+            this.questionsFromHeader = value;
+        })
     }
+
+
+    // Método para guardar los valores de la barra de búsqueda 
+    searchBar(event: any) {
+        this.allTitles = event.target.value;
+        // setTimeout(function () {
+        //     filterTitles = event.target.value   
+        // }, 1500)
+    }
+    
+    // Método para mostrar los resultados de la barra de búsqueda
+    searchTitlesQuestions(questions:any) {
+        this.searchedResults = [];
+        questions.filter((question: any) => {
+            if (question.title.toLowerCase().includes(this.allTitles)) {
+                this.searchedResults.push(question);
+            }
+            })
+            this.filteredTitles = true;
+            this.questionsFromHeader = false;
+            this.questionService.$searchResults.emit(this.searchedResults);
+            this.questionService.$filterTitles.emit(this.filteredTitles);
+            this.questionService.$questionsFromHeader.emit(this.questionsFromHeader);
+            
+            return this.searchedResults;
+    }    
+
 }

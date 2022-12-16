@@ -21,20 +21,41 @@ export class HomeComponent implements OnInit {
     newQuestion: any = {};
     postedQuestions!: Question[];
     sortedQuestions: Array<any> = [];
+    questionsTitles: Array<any> = [];
+    titlesFiltered: Array<any> = [];
+    allQuestions: boolean = true;
+    //onlyQuestionsTitles: Array<any> = [];
 
-    
+    constructor(
+        private questionService: QuestionService,
+        private renderer: Renderer2
+      ) {}
 
   ngOnInit(): void {
     this.questionService.getQuestions().subscribe((question) => {
         this.postedQuestions = question; 
-        this.sortByHour(question);
+        this.sortByDateAndHour(question);
+        // this.postedQuestions.forEach((elem) => {
+        //     this.onlyQuestionsTitles.push(elem.title)
+        // })
+        this.questionService.$questionsTitles.emit(this.postedQuestions); // emitimos las preguntas al componente header para trabajar la barra de búsqueda
+        this.questionService.$allQuestions.emit(this.allQuestions); // emitimos el valor del booleano para cambiarlo a false en el header
     });
+      
+      this.questionService.$searchResults.subscribe((value: any) => {
+        this.questionsTitles = value;
+    }); 
+      
+      this.questionService.$filterTitles.subscribe((value: any) => {
+          this.titlesFiltered = value;
+    });   
+      
+      this.questionService.$questionsFromHeader.subscribe((value: any) => {
+          this.allQuestions = value;      
+    })  
   }
 
-  constructor(
-    private questionService: QuestionService,
-    private renderer: Renderer2
-  ) {}
+  
 
   // Método para limpiar campo del título
   cleanTitle() {
@@ -170,7 +191,7 @@ export class HomeComponent implements OnInit {
   }
 
     // Método para ordenar por fecha y hora de publicación
-    sortByHour(question: any) {
+    sortByDateAndHour(question: any) {
         this.sortedQuestions = this.postedQuestions.sort(function (a, b) {
             if (a.createdAt > b.createdAt) {
                 return -1;

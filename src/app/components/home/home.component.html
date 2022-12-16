@@ -25,19 +25,33 @@
     </div>
     <h3 class="text-publications">Todas las preguntas</h3>
 </section>`;
-<section class="container-post">
-    <div class="post-publicated"  *ngFor="let question of sortedQuestions">
-        <div>
+<section *ngIf="allQuestions">
+    <section class="container-post">
+        <div class="post-publicated" *ngFor="let question of sortedQuestions">
             <div>
-                <p class="question-title">{{question.title}}</p> 
-                <p class="question-detail">{{question.detail}}</p>
+                <div>
+                    <p class="question-title">{{question.title}}</p>
+                    <p class="question-detail">{{question.detail}}</p>
+                </div>
+                <div class="post-date">
+                    <p> {{ question.date }} {{ question.hour }} </p>
+                </div>
             </div>
-            <div class="post-date">
-                <p> {{ question.date }}  {{ question.hour }} </p>
+        </div>`;
+    </section>
+</section>
+<section *ngIf="titlesFiltered">
+    <section class="container-post">
+        <div class="post-publicated" *ngFor="let filterTitle of questionsTitles">
+            <div>
+                <div>
+                    <p class="question-title">{{filterTitle.title}}</p>
+                    <p class="question-detail">{{filterTitle.detail}}</p>
+                </div>
+                <div class="post-date">
+                    <p> {{ filterTitle.date }} {{filterTitle.hour }} </p>
+                </div>
             </div>
-            <!-- <div class="input-readonly">
-                <span id=${post.id} class="post-publicated cont-post" role="textbox"></span>
-            </div> -->
-        </div>
-    </div>`;
+        </div>`;
+    </section>
 </section>

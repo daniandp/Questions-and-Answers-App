@@ -23,6 +23,10 @@
     margin-bottom: 1rem;
   }
 
+.post-publicated {
+    height: 16.8vh;
+}
+
 .container-input-post > .cont-descriptions-post {
     display: flex;
     flex-direction: column;
@@ -56,6 +60,19 @@
 .post-date {
     display: flex;
     justify-content: flex-end;
+}
+
+.question-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.question-detail {
+    font-size: 1rem;
+}
+
+.post-date > p {
+    font-size: 0.688rem;
 }
 
 .text-publications {
