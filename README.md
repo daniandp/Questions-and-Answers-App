@@ -2,26 +2,43 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.3.
 
-## Development server
+## Instrucciones para ejecutar la aplicación
+Para ver y ejecutar la aplicación desplegada puede ingresar al link https://questions-and-answers-b2b.netlify.app/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+    *Una vez dentro de la aplicación, verá la página de bienvenida en la ruta /welcome, 
+    de click en el botón "ver contenido" para acceder a la sección donde podrá 
+    visualizar todas las preguntas
 
-## Code scaffolding
+    *En la ruta /home, podrá ver una caja de texto para que pueda ingresar nuevas preguntas,
+    además podrá visualizar preguntas que fueron realizadas con anterioridad, las cuales
+    están ordenadas desde la más nueva a la más antigua
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    *Para realizar una pregunta, ingrese un título y detalles de la misma en la caja de texto,
+    luego de click el botón "publicar", tome en cuenta que sin título y detalle no podrá publicar
+    su pregunta. Al dar click el botón "publicar" verá su pregunta inmediatamente 
+    de primera en la línea de tiempo
 
-## Build
+    *Para ver las respuestas a las preguntas, de click en el título de cada pregunta y la 
+    página lo redigirá al detalle de cada pregunta
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    *En la ruta /answers, podrá ver todas las respuestas de la pregunta seleccionada,
+    además podrá agregar una nueva respuesta en la caja de texto que se encuentra
+    al final
 
-## Running unit tests
+    *Para ingresar una nueva respuesta, ingrese el detalle de la misma y luego de click
+    en el botón "publicar", tome en cuenta que no podrá publicar una respuesta vacía. 
+    Al dar click el botón "publicar" verá su respuesta inmediatamente de primera en la línea 
+    de tiempo
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    *Para volver a la sección donde están todas las preguntas haga click en el botón
+    "hacer una pregunta o volver", eso lo redirigirá a la ruta /home
 
-## Running end-to-end tests
+    *Si desea buscar una pregunta por su título, puede usar la barra de búsqueda que se
+    encuentra en la barra de navegación. Ingrese cualquier letra o palabra y de click
+    en el botón "buscar", si existen preguntas con ese nombre aparecerán en pantalla. Para
+    volver a ver todas las preguntas, limpie la barra de búsqueda
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    *Puede usar la barra de navegación para volver a la ruta de /welcome, haciendo 
+    click en "Q&A", también puede hacer click en "Preguntas y respuestas" y será redirigido
+    a la ruta de /home
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
