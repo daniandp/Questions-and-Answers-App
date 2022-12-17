@@ -1,4 +1,5 @@
 <app-header></app-header>
+<STYLE>A {text-decoration: none;} </STYLE>
 <section class="container-main">
     <h3 class="text-publications">Hacer una pregunta</h3>
     <div class="container-post">
@@ -24,20 +25,20 @@
         </div>
     </div>
     <h3 class="text-publications">Todas las preguntas</h3>
-</section>`;
+</section>
 <section *ngIf="allQuestions">
     <section class="container-post">
         <div class="post-publicated" *ngFor="let question of sortedQuestions">
             <div>
                 <div>
-                    <p class="question-title">{{question.title}}</p>
+                    <a [routerLink]="['/answers', question.id]"><p class="question-title">{{question.title}}</p></a>
                     <p class="question-detail">{{question.detail}}</p>
                 </div>
                 <div class="post-date">
                     <p> {{ question.date }} {{ question.hour }} </p>
                 </div>
             </div>
-        </div>`;
+        </div>
     </section>
 </section>
 <section *ngIf="titlesFiltered">
@@ -52,6 +53,6 @@
                     <p> {{ filterTitle.date }} {{filterTitle.hour }} </p>
                 </div>
             </div>
-        </div>`;
+        </div>
     </section>
 </section>

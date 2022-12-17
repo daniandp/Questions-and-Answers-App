@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4" >
+    <button class="btn btn-primary" type="button" routerLink="/home" routerLinkActive="active">Hacer una pregunta o volver</button>
+</div>
+<section class="container-post" *ngFor="let item of question ">
+    <div class="post-publicated">
+        <div>
+            <div>
+                <p class="question-title">{{item.title}}</p>
+                <p class="question-detail">{{item.detail}}</p>
+            </div>
+            <div class="post-date">
+                <p>{{item.date}} {{item.hour}} </p>
+            </div>
+        </div>
+    </div>
+    <h3 class="text-publications">Respuestas</h3>
+</section>
+<section class="container-post" *ngFor="let answer of sortedAnswers">
+    <div class="post-publicated">
+        <div>
+            <div>
+                <p class="question-detail">{{answer.content}}</p>
+            </div>
+            <div class="post-date">
+                <p> {{answer.date}} {{answer.hour}} </p>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container-post">
+    <div class="container-input-post">
+        <div class="cont-descriptions-post">
+            <span class="span-text">Tu respuesta</span>
+            <span #answerContent role="textbox" contenteditable class="create-post" (click)=" cleanAnswer()">Da una respuesta detallada</span>
+        </div>
+        <p #messageError class="message-error"></p>
+        <div class="d-grid gap-3 d-md-flex">
+            <button class="btn btn-primary" type="button" (click)="postAnswer()">Publicar</button>
+        </div>
+    </div>
+</div>
+

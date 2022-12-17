@@ -8,7 +8,7 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class HeaderComponent implements OnInit  {
     // @ViewChild('searchBar') searchBar!: ElementRef;
-    titleQuestion: Array<any> = []; // traemos el título de home
+    questionsFromHome: Array<any> = []; // traemos las preguntas de home
     searchedResults: Array<any> = [];
     allTitles: string = ''
     filteredTitles: boolean = false;
@@ -18,11 +18,11 @@ export class HeaderComponent implements OnInit  {
     constructor(private questionService: QuestionService) {}
 
     ngOnInit(): void {
-        this.questionService.$questionsTitles.subscribe((value: any) => {
-            this.titleQuestion = value;
+        this.questionService.$arrayOfQuestion.subscribe((value: any) => {
+            this.questionsFromHome = value;
         });
 
-        this.questionService.$allQuestions.subscribe((value: any) => {
+        this.questionService.$sectionAllQuestions.subscribe((value: any) => {
             this.questionsFromHeader = value;
         })
     }

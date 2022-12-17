@@ -15,47 +15,42 @@ import Question from 'src/app/interfaces/question.interface';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-    @ViewChild('questionTitle') questionTitle!: ElementRef;
-    @ViewChild('questionContent') questionContent!: ElementRef;
-    @ViewChild('messageError') messageError!: ElementRef;
-    newQuestion: any = {};
-    postedQuestions!: Question[];
-    sortedQuestions: Array<any> = [];
-    questionsTitles: Array<any> = [];
-    titlesFiltered: Array<any> = [];
-    allQuestions: boolean = true;
-    //onlyQuestionsTitles: Array<any> = [];
+  @ViewChild('questionTitle') questionTitle!: ElementRef;
+  @ViewChild('questionContent') questionContent!: ElementRef;
+  @ViewChild('messageError') messageError!: ElementRef;
+  newQuestion: any = {};
+  postedQuestions!: Question[];
+  sortedQuestions: Array<any> = [];
+  questionsTitles: Array<any> = [];
+  titlesFiltered: Array<any> = [];
+  allQuestions: boolean = true;
 
-    constructor(
-        private questionService: QuestionService,
-        private renderer: Renderer2
-      ) {}
+  constructor(
+    private questionService: QuestionService,
+    private renderer: Renderer2
+  ) {}
 
-  ngOnInit(): void {
+    ngOnInit(): void {
+      // Obtenemos las preguntas de la colección de firestore
     this.questionService.getQuestions().subscribe((question) => {
-        this.postedQuestions = question; 
-        this.sortByDateAndHour(question);
-        // this.postedQuestions.forEach((elem) => {
-        //     this.onlyQuestionsTitles.push(elem.title)
-        // })
-        this.questionService.$questionsTitles.emit(this.postedQuestions); // emitimos las preguntas al componente header para trabajar la barra de búsqueda
-        this.questionService.$allQuestions.emit(this.allQuestions); // emitimos el valor del booleano para cambiarlo a false en el header
+      this.postedQuestions = question;
+      this.sortByDateAndHour(question);
+      this.questionService.$arrayOfQuestion.emit(this.postedQuestions); // emitimos las preguntas al componente header para trabajar la barra de búsqueda
+      this.questionService.$sectionAllQuestions.emit(this.allQuestions); // emitimos el valor del booleano para cambiarlo a false en el header
     });
-      
-      this.questionService.$searchResults.subscribe((value: any) => {
-        this.questionsTitles = value;
-    }); 
-      
-      this.questionService.$filterTitles.subscribe((value: any) => {
-          this.titlesFiltered = value;
-    });   
-      
-      this.questionService.$questionsFromHeader.subscribe((value: any) => {
-          this.allQuestions = value;      
-    })  
-  }
 
-  
+    this.questionService.$searchResults.subscribe((value: any) => {
+      this.questionsTitles = value;
+    });
+
+    this.questionService.$filterTitles.subscribe((value: any) => {
+      this.titlesFiltered = value;
+    });
+
+    this.questionService.$questionsFromHeader.subscribe((value: any) => {
+      this.allQuestions = value;
+    });
+  }
 
   // Método para limpiar campo del título
   cleanTitle() {
@@ -67,7 +62,6 @@ export class HomeComponent implements OnInit {
     ) {
       this.questionTitle.nativeElement.textContent = '';
     }
-      
   }
 
   // Método para limpiar campo del contenido
@@ -143,6 +137,7 @@ export class HomeComponent implements OnInit {
     ) {
       this.messageError.nativeElement.innerHTML =
         'Tu pregunta debe tener detalles';
+
       this.renderer.setStyle(
         this.messageError.nativeElement,
         'display',
@@ -166,12 +161,15 @@ export class HomeComponent implements OnInit {
         hour: dateSeparator[1],
         createdAt: today.getTime(),
       };
+
       const response = await this.questionService.addQuestion(this.newQuestion);
+
       this.questionTitle.nativeElement.textContent =
         'Ejm: ¿Cómo se utiliza el método filter?';
       this.questionContent.nativeElement.textContent =
         'Ejm: estoy intentando filtrar un elemento de un array';
       this.messageError.nativeElement.innerHTML = '';
+
       this.renderer.setStyle(
         this.messageError.nativeElement,
         'display',
@@ -190,20 +188,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
-    // Método para ordenar por fecha y hora de publicación
-    sortByDateAndHour(question: any) {
-        this.sortedQuestions = this.postedQuestions.sort(function (a, b) {
-            if (a.createdAt > b.createdAt) {
-                return -1;
+  // Método para ordenar las preguntas por fecha y hora de publicación
+  sortByDateAndHour(question: any) {
+    this.sortedQuestions = this.postedQuestions.sort(function (a, b) {
+      if (a.createdAt > b.createdAt) {
+        return -1;
+      } else if (b.createdAt < a.createdAt) {
+        return 1;
+      }
 
-            } else if (b.createdAt < a.createdAt) {
-                return 1
-            }
-
-            return 0
-        })
-    }
-
-    
-
+      return 0;
+    });
+  }
 }
